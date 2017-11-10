@@ -5,6 +5,16 @@ Little project for messing around with `GenServer.call/3` timeouts.
 
 See the accompanying blog post, which is not yet written, for explanations.
 
+For your entertainment and convenience it provides the following modules:
+
+* [Timesout](lib/timesout.ex) - a GenServer that sleeps during a call.
+* [CallsStuff](lib/calls_stuff.ex) - a GenServer that receives a function which it executes in its process, via a `cast`.
+* `catching_function/1` in [CallsStuff](lib/calls_stuff.ex) that creates a function that wraps another in a block that catches exits.
+
+There's also pure Erlang versions of some of this in [src/timesout.erl](src/timesout.erl)
+
+
+
 In the meantime try the following:
 
 ```elixir
