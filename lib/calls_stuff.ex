@@ -4,6 +4,7 @@ defmodule CallsStuff do
   """
 
   use GenServer
+  require Logger
 
   @name __MODULE__
 
@@ -11,23 +12,27 @@ defmodule CallsStuff do
     GenServer.start_link(__MODULE__, {}, name: @name)
   end
 
+  def init(_) do
+    {:ok, %{}}
+  end
+
   @doc """
   Wrap the function `fun` in a function that catches errors and
-  exits. Does lots of `IO.inspect` because this is for experimentation
-  so bite me.
+  exits. Logs out what's happening.
   """
   @spec catching_function(fun) :: fun
   def catching_function(fun) do
     fn ->
       try do
-        IO.inspect "About to..."
+        log("About to...")
         result = fun.()
-        IO.inspect {"Done", result}
+        log({"Done", result})
       catch
         err, term ->
-          IO.inspect {:catch, err, term}
+          log({:catch, err, term})
       end
-      IO.inspect "Really done"
+
+      log("Really done")
     end
   end
 
@@ -46,7 +51,13 @@ defmodule CallsStuff do
   end
 
   def handle_info({call_ref, reply}, s) when is_reference(call_ref) do
-    IO.inspect {:call_reply_received, reply}
+    log({:call_reply_received, reply})
     {:noreply, s}
+  end
+
+  defp log(log) do
+    log
+    |> inspect()
+    |> Logger.info()
   end
 end

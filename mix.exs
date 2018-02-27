@@ -5,8 +5,8 @@ defmodule CallTimeouts.Mixfile do
     [
       app: :call_timeouts,
       version: "0.1.0",
-      elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      elixir: "~> 1.6",
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -20,8 +20,8 @@ defmodule CallTimeouts.Mixfile do
 
   defp deps do
     [
-      {:dialyxir, "~> 0.5.1"},
-      {:credo, ">= 0.8.8"},
+      {:dialyxir, "~> 0.5"},
+      {:credo, "~> 0.8"}
     ]
   end
 end
