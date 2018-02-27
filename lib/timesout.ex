@@ -6,8 +6,6 @@ defmodule Timesout do
   """
   use GenServer
 
-
-
   @name __MODULE__
   @timeout 100
 

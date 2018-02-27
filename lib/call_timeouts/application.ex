@@ -5,10 +5,11 @@ defmodule CallTimeouts.Application do
 
   def start(_type, _args) do
     import Supervisor.Spec
+
     children = [
       worker(Timesout, []),
       worker(:timesout, []),
-      worker(CallsStuff, []),
+      worker(CallsStuff, [])
     ]
 
     opts = [strategy: :one_for_one, name: CallTimeouts.Supervisor]
